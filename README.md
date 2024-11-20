@@ -19,33 +19,71 @@
     </a>
 </p>
 
-## **Field Reservations**
+# ⚡ *Field Reservations* - Web Application for Field Booking
 
-**Field Reservations** is a web application built with **Laravel**, **JavaScript**, and **MongoDB** to manage field reservations for various activities like sports, events, and more. This platform provides an easy-to-use interface for users to book fields based on time slots, view availability, and manage their bookings.
-
-### **Key Features:**
-- **User Authentication**: Registration, login, and profile management for users.
-- **Field Booking**: View available fields and make reservations based on time slots.
-- **Real-Time Availability**: Get real-time updates on field availability.
-- **MongoDB Integration**: Data is stored and managed using **MongoDB** for fast and scalable storage.
-- **Laravel Backend**: The backend is powered by **Laravel**, utilizing its routing, ORM (Eloquent), and other powerful features.
-- **Frontend with JavaScript**: Dynamic and interactive frontend powered by **JavaScript** for a smooth user experience.
-
-### **Technologies Used:**
-- **Backend**: Laravel (PHP)
-- **Frontend**: JavaScript
-- **Database**: MongoDB
-- **Package Management**: Composer (PHP dependencies)
-- **Version Control**: Git, GitHub
+*Une application web pour la gestion de la réservation de terrains pour des événements sportifs et autres.*  
+Développé avec *Laravel* (Backend), *MongoDB* (Base de données), et *JavaScript* (Frontend).
 
 ---
 
-## **Installation**
+## 🚀 *Fonctionnalités*
 
-Follow these steps to set up the project on your local machine:
+- *Gestion des utilisateurs* :  
+  Enregistrement, connexion et gestion des profils des utilisateurs, y compris la distinction entre utilisateurs clients et administrateurs.
 
-### **1. Clone the repository:**
+- *Réservation de terrains* :  
+  Les utilisateurs peuvent consulter la disponibilité des terrains et réserver des créneaux horaires.
 
-```bash
-git clone https://github.com/your-username/field-reservations.git
-cd field-reservations
+- *Suivi des réservations* :  
+  Gestion des réservations effectuées, avec possibilité d'annuler ou de modifier une réservation existante.
+
+- *MongoDB pour la gestion des données* :  
+  Utilisation de **MongoDB** pour une gestion rapide et évolutive des données de réservation, utilisateurs et terrains.
+
+- *Frontend interactif avec JavaScript* :  
+  Interface utilisateur dynamique pour une expérience fluide de gestion des réservations.
+
+---
+
+## 📂 *Structure du Projet*
+
+### 🛠 *Backend (Laravel)*  
+Le backend est responsable de la gestion des utilisateurs, des réservations et des terrains.
+
+#### Structure des répertoires :
+
+backend/
+├── app/                # Code source de l'application
+│   ├── Http/           # Contrôleurs, middleware et requêtes
+│   ├── Models/         # Modèles Eloquent pour interagir avec la base de données MongoDB
+│   └── ...
+├── config/             # Configuration des services (MongoDB, etc.)
+├── database/           # Migrations et seeders pour MongoDB
+├── routes/             # Définition des routes API
+├── storage/            # Fichiers de stockage (logs, fichiers temporaires, etc.)
+└── .env                # Variables d'environnement
+
+### 🗄 *Base de données (MongoDB)*  
+La base de données MongoDB est utilisée pour stocker les informations liées aux utilisateurs, terrains et réservations.
+
+---
+
+## 🖥 *Prérequis*
+
+Avant de commencer, assurez-vous d'avoir installé :
+
+- [PHP 8.1+](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Docker](https://www.docker.com/) (optionnel)
+
+---
+
+## ⚙ *Installation*
+
+### 🛠 *Backend (Laravel)*
+
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/your-username/field-reservations.git
+   cd field-reservations/backend
