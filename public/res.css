@@ -1,0 +1,52 @@
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0 auto;
+    background-color: #ffa62b;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #ffa62b;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.error {
+    color: red;
+}
+
+.link {
+    text-decoration: none;
+    color:  #ffa62b;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color:  #ffa62b;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+    transition: 0.5s;
+    box-shadow: 0 0 10px #0056b3;
+    transform: translateY(-5px);
+}

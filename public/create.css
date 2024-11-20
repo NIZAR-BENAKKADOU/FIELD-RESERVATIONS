@@ -1,0 +1,19 @@
+/* create.css */
+
+.card {
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.btn {
+    margin-top: 10px;
+}

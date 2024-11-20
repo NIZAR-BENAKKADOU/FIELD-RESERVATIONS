@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .brand-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .navbar-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-links li {
+    margin-left: 20px;
+  }
+  
+  .navbar-links a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    color: #ffa62b;
+  }
+  
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    flex: 1;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 40px;
+  }
+  
+  .content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .content p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #666;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  button {
+    background-color: #ffa62b;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e59400;
+  }
+  
+  .image-container {
+    flex: 1;
+    background: url('football-field.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100%;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card img {
+    transition: transform 0.5s;
+  }
+  
+  .card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffa62b;
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .buttons a:hover {
+    background-color: #e59400;
+  }
+  
+  .register-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 70px;
+    border-radius: 20px;
+    background-image: linear-gradient(120deg, #00ffc3 0%, #c2e9fb 100%);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
