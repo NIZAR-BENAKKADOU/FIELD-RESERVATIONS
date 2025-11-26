@@ -1,0 +1,26 @@
+
+   INFO  Running migrations.  
+
+  2025_11_25_155956_create_commentaires_table  5.40ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'commentaires' already exists (Connection: mysql, SQL: create table `commentaires` (`id` bigint unsigned not null auto_increment primary key, `user_id` bigint unsigned not null, `terrain_id` bigint unsigned not null, `content` text not null, `rating` int not null default '5', `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:813
+    809Ôûò                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    810Ôûò                 );
+    811Ôûò             }
+    812Ôûò 
+  Ô×£ 813Ôûò             throw new QueryException(
+    814Ôûò                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    815Ôûò             );
+    816Ôûò         }
+    817Ôûò     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:571
+      PDOException::("SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'commentaires' already exists")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:571
+      PDOStatement::execute()
+

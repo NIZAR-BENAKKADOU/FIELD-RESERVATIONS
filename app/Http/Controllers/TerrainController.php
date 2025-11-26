@@ -134,4 +134,19 @@ class TerrainController extends Controller
 
         return redirect()->route('terrains.index')->with('supprimer', 'Terrain deleted successfully');
     }
+    public function storeComment(Request $request, Terrain $terrain)
+    {
+        $request->validate([
+            'content' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $terrain->commentaires()->create([
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+            'rating' => $request->rating,
+        ]);
+
+        return back()->with('success', 'Comment added successfully!');
+    }
 }

@@ -1,141 +1,125 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="py-12">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="solid-card rounded-2xl overflow-hidden shadow-xl">
+                
+                <!-- Header -->
+                <div class="bg-gray-800/50 p-6 border-b border-gray-700">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <i class="bi bi-calendar-plus text-indigo-500"></i>
+                        Book Reservation
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Secure your spot on the field.</p>
+                </div>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Créer une nouvelle réservation') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('reservations.store') }}">
+                <div class="p-8">
+                    <form method="POST" action="{{ route('reservations.store') }}" class="space-y-6">
                         @csrf
+                        <input type="hidden" name="users_id" value="{{ auth()->id() }}">
+                        <input type="hidden" name="terrain_id" value="{{ $terrain->id }}">
 
-                        <!-- User ID -->
-                        <div class="form-group row">
-                            <label for="users_nom"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Nom Utilisateur') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" id="users_nom" name="users_nom" class="form-control"
-                                    value="{{ $currentUser->nom }}" readonly>
-                                <input type="hidden" name="users_id" value="{{ auth()->id() }}">
+                        <!-- User & Terrain Info (Read-only) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Player Name</label>
+                                <div class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                                    {{ $currentUser->nom }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Field</label>
+                                <div class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                                    {{ $terrain->nom }}
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Terrain -->
-                        <div class="form-group row">
-                            <label for="terrain_id"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Terrain') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" id="terrain_id" name="terrain_id" class="form-control"
-                                    value="{{ $terrain->nom }}" readonly>
-                                <input type="hidden" name="terrain_id" value="{{ $terrain->id }}">
-                            </div>
+                        <!-- Date -->
+                        <div>
+                            <label for="date_de_reservation" class="block text-sm font-medium text-gray-300 mb-2">Date</label>
+                            <input type="date" id="date_de_reservation" name="date_de_reservation" 
+                                class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                                required min="{{ date('Y-m-d') }}">
+                            <x-input-error :messages="$errors->get('date_de_reservation')" class="mt-2" />
                         </div>
 
-                        <!-- Montant -->
-                        <div class="form-group row">
-                            <label for="montant"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Montant') }}</label>
-                            <div class="col-md-6">
-                                <input type="number" id="montant" name="montant" step="0.01" class="form-control"
-                                    value="{{ $terrain->prix }}" readonly>
-                            </div>
-                        </div>
-                        <!-- Heure de début -->
-                        <div class="form-group row">
-                            <label for="heure_debut"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Heure de début') }}</label>
-                            <div class="col-md-6">
-                                <select id="heure_debut" class="form-control @error('heure_debut') is-invalid @enderror"
-                                    name="heure_debut">
-                                    @for ($hour = 16; $hour <= 24; $hour++)
-                                        <option value="{{ sprintf('%02d', $hour) }}:00">{{ sprintf('%02d', $hour) }}:00
-                                        </option>
+                        <!-- Time Selection -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="heure_debut" class="block text-sm font-medium text-gray-300 mb-2">Start Time</label>
+                                <select id="heure_debut" name="heure_debut" 
+                                    class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                    @for ($hour = 8; $hour <= 23; $hour++)
+                                        <option value="{{ sprintf('%02d', $hour) }}:00">{{ sprintf('%02d', $hour) }}:00</option>
                                     @endfor
                                 </select>
-                                @error('heure_debut')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <x-input-error :messages="$errors->get('heure_debut')" class="mt-2" />
                             </div>
-                        </div>
 
-                        <!-- Heure de fin -->
-                        <div class="form-group row">
-                            <label for="heure_fin"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Heure de fin') }}</label>
-                            <div class="col-md-6">
-                                <select id="heure_fin" class="form-control @error('heure_fin') is-invalid @enderror"
-                                    name="heure_fin">
-                                    <option value="">Sélectionner une heure de fin</option>
+                            <div>
+                                <label for="heure_fin" class="block text-sm font-medium text-gray-300 mb-2">End Time</label>
+                                <select id="heure_fin" name="heure_fin" 
+                                    class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                    <option value="">Select Start Time First</option>
                                 </select>
-                                @error('heure_fin')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $('#heure_debut').change(function () {
-                                    var selectedStartTime = $(this).val();
-                                    $('#heure_fin').empty();
-                                    if (selectedStartTime) {
-                                        var startHour = parseInt(selectedStartTime.substring(0, 2));
-                                        // If the selected start time is before 11 PM
-                                        if (startHour < 23) {
-                                            for (var hour = startHour + 1; hour <= 24; hour++) {
-                                                $('#heure_fin').append($('<option>', {
-                                                    value: ('0' + hour).slice(-2) + ':00',
-                                                    text: ('0' + hour).slice(-2) + ':00'
-                                                }));
-                                            }
-                                        } else {
-                                            // If the selected start time is 11 PM or later, limit end time to midnight
-                                            $('#heure_fin').append($('<option>', {
-                                                value: '00:00',
-                                                text: '00:00'
-                                            }));
-                                        }
-                                    }
-                                });
-                            });
-                        </script>
-
-
-                        <!-- Date de réservation -->
-                        <div class="form-group row">
-                            <label for="date_de_reservation"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Date de réservation') }}</label>
-                            <div class="col-md-6">
-                                <input id="date_de_reservation" type="date"
-                                    class="form-control @error('date_de_reservation') is-invalid @enderror"
-                                    name="date_de_reservation">
-                                @error('date_de_reservation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <x-input-error :messages="$errors->get('heure_fin')" class="mt-2" />
                             </div>
                         </div>
 
-
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Créer la réservation') }}
-                                </button>
+                        <!-- Price -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Price per Hour</label>
+                            <div class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-green-400 font-bold flex items-center gap-2">
+                                <i class="bi bi-cash"></i> {{ $terrain->prix }} DH
                             </div>
+                            <input type="hidden" name="montant" value="{{ $terrain->prix }}">
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-700 mt-6">
+                            <a href="{{ route('dashboard') }}" class="px-6 py-2 text-gray-400 hover:text-white transition-colors">Cancel</a>
+                            <button type="submit" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/30">
+                                Confirm Booking
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startSelect = document.getElementById('heure_debut');
+            const endSelect = document.getElementById('heure_fin');
+
+            function updateEndTime() {
+                const startTime = startSelect.value;
+                endSelect.innerHTML = '';
+                
+                if (startTime) {
+                    const startHour = parseInt(startTime.split(':')[0]);
+                    
+                    if (startHour < 24) {
+                        for (let hour = startHour + 1; hour <= 24; hour++) {
+                            const timeString = (hour === 24 ? '00' : hour.toString().padStart(2, '0')) + ':00';
+                            const option = document.createElement('option');
+                            option.value = timeString;
+                            option.text = timeString;
+                            endSelect.add(option);
+                        }
+                        // Default to 1 hour duration
+                        if (endSelect.options.length > 0) {
+                            endSelect.selectedIndex = 0;
+                        }
+                    }
+                }
+            }
+
+            startSelect.addEventListener('change', updateEndTime);
+            
+            // Initialize
+            updateEndTime();
+        });
+    </script>
+</x-app-layout>

@@ -9,10 +9,15 @@ class Commentaire extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['texte', 'users_id'];
+    protected $fillable = ['content', 'rating', 'user_id', 'terrain_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function terrain()
+    {
+        return $this->belongsTo(Terrain::class);
     }
 }

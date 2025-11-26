@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable // implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'nom',
         'email',
+        'phone',
         'password',
         'role',
         'remember_token'
@@ -31,7 +32,7 @@ class User extends Authenticatable
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->hasMany(Reservation::class, 'users_id');
     }
 
     /**

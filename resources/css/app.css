@@ -3,3 +3,48 @@
 @tailwind utilities;
 
 
+@layer base {
+    body {
+        @apply bg-midnight text-white;
+    }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+    background: rgba(26, 34, 54, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+    background: rgba(11, 17, 32, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Navbar Hover Effects */
+.nav-link-3d {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link-3d::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #10B981;
+    transition: width 0.3s ease;
+}
+
+.nav-link-3d:hover::after {
+    width: 100%;
+}
+
+.nav-link-3d:hover {
+    color: #10B981;
+    transform: translateY(-1px);
+}
